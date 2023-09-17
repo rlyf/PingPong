@@ -46,7 +46,7 @@ class Player(GameSprite):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_UP] and self.rect.y > 5:
             self.rect.y -= self.speed
-        if keys_pressed[K_DOWN] and self.rect.y < height - 150:
+        if keys_pressed[K_DOWN] and self.rect.y < height - 150: #height is win_height
             self.rect.y += self.speed
     def update_right(self):
         keys_pressed = key.get_pressed()
@@ -70,8 +70,8 @@ blueScore = 0
 redScore = 0
 
 font_score = pygame.font.Font(None, 18)
-blueBoard = font_score.render('BLUE: ' + str(blueScore), True, (0, 0, 0))
-redBoard = font_score.render('RED: ' + str(redScore), True, (0, 0, 0))
+blueBoard = font_score.render('BLUE: ' + str(blueScore), True, WHITE)
+redBoard = font_score.render('RED: ' + str(redScore), True, WHITE)
 
 initial_direction = random.choice([-1, 1]) 
 speed_x = 3
@@ -91,19 +91,19 @@ while game:
         ball.rect.x += speed_x
         ball.rect.y += speed_y
 
-        window.blit(blueBoard, (10, 10))
-        window.blit(redBoard, (width - 80, 10))
+        window.blit(blueBoard, (width - 80, 10))
+        window.blit(redBoard, (10, 10))
 
         #Czech collision
         if sprite.collide_rect(paddle1, ball):
             redScore += 1
-            redBoard = font_score.render('RED:' + str(redScore), True, (0,0,0))
+            redBoard = font_score.render('RED:' + str(redScore), True, WHITE)
             speed_x *= -1
             speed_y *= 1
 
         if sprite.collide_rect(paddle2, ball):
             blueScore += 1
-            blueBoard = font_score.render('BLUE:' + str(blueScore), True, (0,0,0))
+            blueBoard = font_score.render('BLUE:' + str(blueScore), True, WHITE)
             speed_x *= -1
             speed_y *= 1
 
